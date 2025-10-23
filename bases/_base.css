@@ -1,0 +1,20 @@
+/*==================================================
+  B A S E S : Maquetado básico
+==================================================*/
+
+@layer base {
+  :is(body, html) { @apply scroll-smooth }
+  html { @apply scroll-bar-decorated text-[16px] bg-background; }
+  body { @apply text-base; }
+
+  :is(b, strong){ @apply font-bold; }
+  ul { @apply pl-0 list-none; }
+  button { @apply cursor-pointer}
+  a { @apply text-button}
+
+  section {
+    padding-top: clamp(3.75rem, 2.4rem + 3.6vw, 5.625rem);
+    padding-bottom: clamp(4.5rem, 3.6rem + 3vw, 6.25rem);
+    padding-inline: 0;
+  }
+}

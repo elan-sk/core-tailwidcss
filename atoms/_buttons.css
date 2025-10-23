@@ -1,0 +1,39 @@
+/*==================================================
+  RESET BUTTONS
+==================================================*/
+@layer components {
+  /* Reseteo basico */
+  :where(a, button) {
+    @apply !no-underline text-button !font-semibold text-outline;
+    & span { @apply z-10; }
+  }
+  :is(.btn-primary, .btn-secondary, .btn-tertiary) {
+    @apply inline-flex flex-center border-3 px-6 py-2 rounded-full transition-all duration-300 max-w-px-400;
+  }
+}
+
+/*==================================================
+  BUTTON PRIMARY
+==================================================*/
+@utility btn-primary {
+  @apply border-primary bg-primary text-on-primary relative;
+  &:before {
+    @apply block content-[''] size-px position-center rounded-full origin-center duration-300 transition-all;
+  }
+  &:hover, &:active, &:focus {
+    @apply text-on-primary-dk;
+    &::before {
+        @apply aspect-square bg-primary-dk;
+        width: calc(100% + 10px);
+        height: calc(100% + 10px);
+      }
+  }
+}
+@layer utilities {
+  :is(.bg-primary-dk, .bg-primary, .bg-error) {
+    & .btn-primary {
+      @apply border-on-primary overflow-hidden;
+    }
+  }
+}
+
