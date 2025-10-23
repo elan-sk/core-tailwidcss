@@ -2738,6 +2738,10 @@ Crea un modal centrado con:
 - 🔗 [Calculadora Clamp CSS](https://elan-sk.github.io/calculadora-clamp-css/) - Para crear tipografía responsive
 - 🔗 [Tailwind CSS Docs](https://tailwindcss.com/docs) - Documentación oficial de Tailwind
 
+### Cursos de Tailwindcss
+- 🔗 [Curso de Tailwincss - midudev](https://www.youtube.com/watch?v=R5EXap3vNDA) 
+- 🔗 [Curso de Tailwincss - Socratech](https://www.youtube.com/watch?v=XTEyb5Dysi4&list=PLu92OXKwcPyQFNL_gTRaEMwu39EjxuBFY) 
+
 ### Contacto
 Si tienes dudas o sugerencias sobre el core:
 1. Revisa esta documentación
