@@ -1,8 +1,0 @@
-/*==================================================
-  DECORADOS DEL SITIO
-==================================================*/
-/* === SCROLL BAR === */
-@utility scroll-bar-decorated {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-primary) var(--color-primary-lt);
-}
