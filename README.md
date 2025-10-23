@@ -30,28 +30,30 @@ El core está organizado en módulos independientes que se importan en archivos 
 
 ```
 styles/
-├── base/
+├── index.css              → Archivo principal que importa todo
+├── bases/
 │   ├── index.css          → Importa _base.css
 │   └── _base.css          → Estilos base del HTML
-├── config/
+├── settings/
 │   ├── index.css          → Importa colores, containers, fonts, typography
 │   ├── _colors.css        → Sistema de colores semánticos
 │   ├── _containers.css    → Sistema de containers responsive
 │   ├── _fonts.css         → Importación de fuentes
 │   └── _typography.css    → Escalas tipográficas
-├── components/
+├── atoms/
 │   ├── index.css          → Importa _buttons.css
 │   └── _buttons.css       → Componentes de botones
 ├── utilities/
 │   ├── index.css          → Importa utilidades varias
-│   ├── _decorateds.css    → Decoraciones (scrollbar)
+│   ├── _decorateds.css    → Decoraciones (scrollbar, imágenes)
 │   ├── _flex.css          → Utilidades de flexbox
 │   ├── _positions.css     → Sistema de posicionamiento
 │   ├── _sizes-rem.css     → Conversión px → rem
 │   └── _test.css          → Herramientas de debug
-└── vendor/
-    ├── index.css          → Importa _swiper.css
-    └── _swiper.css        → Estilos de Swiper.js
+├── libraries/
+│   ├── index.css          → Importa _swiper.css
+│   └── _swiper.css        → Estilos de Swiper.js
+└── readme                 → Documentación del core
 
 ```
 
@@ -1504,6 +1506,235 @@ Cuando el botón está dentro de un fondo oscuro, automáticamente cambia su bor
 
 ---
 
+## 🖼️ Utilidad para Imágenes de Fondo
+
+### La Clase bg-cover
+
+Esta utilidad personalizada está diseñada para trabajar con imágenes de fondo en elementos HTML, configurando todas las propiedades necesarias para una correcta visualización.
+
+### Implementación
+
+```css
+@utility bg-cover {
+  background-position: center center;  /* Centra la imagen */
+  background-repeat: no-repeat;        /* No repite la imagen */
+  background-size: 100%;               /* Cubre el 100% del espacio */
+  display: block;                      /* Elemento de bloque */
+  font-size: 0;                        /* Oculta texto fallback */
+  overflow: hidden;                    /* Esconde desbordamientos */
+  text-indent: -999999px;              /* Mueve texto fuera de vista */
+}
+```
+
+### ¿Cómo Funciona?
+
+**Propiedades de background:**
+- `background-position: center center` → Centra la imagen horizontal y verticalmente
+- `background-repeat: no-repeat` → Evita que la imagen se repita
+- `background-size: 100%` → Hace que la imagen cubra todo el espacio disponible
+
+**Propiedades para ocultar texto:**
+- `font-size: 0` → Reduce el tamaño del texto a 0
+- `text-indent: -999999px` → Mueve el texto fuera de la vista
+- `overflow: hidden` → Esconde cualquier contenido que se desborde
+
+Estas técnicas permiten mantener el texto en el HTML (para SEO y accesibilidad) pero ocultarlo visualmente cuando hay una imagen de fondo.
+
+### Uso con Tailwind
+
+Esta clase se usa **junto con** la utilidad de Tailwind `bg-[url('...')]`:
+
+```html
+<!-- ✅ CORRECTO: Combinar ambas clases -->
+<div class="bg-[url('../images/hero.jpg')] bg-cover h-px-500">
+  Texto alternativo para SEO
+</div>
+
+<!-- Con posicionamiento relativo para contenido -->
+<div class="bg-[url('../images/banner.jpg')] bg-cover h-px-400 relative">
+  <div class="position-center text-h1 text-white">
+    Contenido sobre la imagen
+  </div>
+</div>
+```
+
+### ⚠️ Limitación Importante
+
+**La sintaxis `bg-[url('...')]` SOLO funciona cuando se escribe directamente en el HTML.**
+
+```html
+<!-- ✅ FUNCIONA: URL directa en la clase -->
+<div class="bg-[url('../images/foto.jpg')] bg-cover"></div>
+
+<!-- ❌ NO FUNCIONA: URL generada dinámicamente -->
+<div class="bg-[url('<?= $imagen ?>')] bg-cover"></div>
+
+<!-- ❌ NO FUNCIONA: Con JavaScript -->
+<div class="bg-[url(${imagenUrl})] bg-cover"></div>
+
+<!-- ❌ NO FUNCIONA: Con Twig -->
+<div class="bg-[url('{{ imagen }}')] bg-cover"></div>
+```
+
+### Solución para URLs Dinámicas
+
+Si necesitas URLs dinámicas, usa **estilos inline**:
+
+```html
+<!-- ✅ SOLUCIÓN: Style inline con bg-cover -->
+<div 
+  class="bg-cover h-px-500"
+  style="background-image: url('../images/<?= $imagen ?>');"
+>
+  Texto alternativo
+</div>
+
+<!-- Con JavaScript -->
+<div 
+  id="hero"
+  class="bg-cover h-px-400"
+>
+  Texto alternativo
+</div>
+
+<script>
+  const hero = document.getElementById('hero');
+  hero.style.backgroundImage = `url('${imagenUrl}')`;
+</script>
+
+<!-- Con Twig -->
+<div 
+  class="bg-cover h-px-500"
+  style="background-image: url('{{ imagen }}');"
+>
+  Texto alternativo
+</div>
+```
+
+### Ejemplos Prácticos
+
+**Hero section con imagen de fondo:**
+```html
+<section class="bg-[url('../images/hero-bg.jpg')] bg-cover h-screen relative">
+  Hero Section
+  
+  <!-- Overlay oscuro -->
+  <div class="position-full bg-primary-dk/60"></div>
+  
+  <!-- Contenido -->
+  <div class="position-center z-10 text-center">
+    <h1 class="text-h1 text-white mb-4">Bienvenido</h1>
+    <p class="text-header text-white mb-8">
+      Subtítulo descriptivo
+    </p>
+    <button class="btn-primary">
+      <span>Comenzar</span>
+    </button>
+  </div>
+</section>
+```
+
+**Card con imagen de fondo:**
+```html
+<article class="relative rounded-lg overflow-hidden h-px-400">
+  <!-- Imagen de fondo -->
+  <div class="bg-[url('../images/card-bg.jpg')] bg-cover position-full">
+    Card con imagen de fondo
+  </div>
+  
+  <!-- Contenido sobre la imagen -->
+  <div class="position-full bg-gradient-to-t from-primary-dk/90 to-transparent">
+    <div class="position-b p-6">
+      <h3 class="text-h3 text-white">Título de la Card</h3>
+      <p class="text-base text-white/90">Descripción</p>
+    </div>
+  </div>
+</article>
+```
+
+**Banner con contenido centrado:**
+```html
+<div class="bg-[url('../images/banner.jpg')] bg-cover h-px-300 flex-center relative">
+  Banner Section
+  
+  <!-- Overlay -->
+  <div class="position-full bg-primary/50"></div>
+  
+  <!-- Texto -->
+  <div class="relative z-10 text-center">
+    <h2 class="text-h2 text-white">Título del Banner</h2>
+  </div>
+</div>
+```
+
+**Galería con imágenes dinámicas (PHP):**
+```php
+<?php 
+$imagenes = ['foto1.jpg', 'foto2.jpg', 'foto3.jpg'];
+?>
+
+<div class="flex-grid-3 gap-y-4">
+  <?php foreach($imagenes as $img): ?>
+    <div 
+      class="bg-cover h-px-300 rounded-lg"
+      style="background-image: url('../images/<?= $img ?>');"
+    >
+      <?= $img ?>
+    </div>
+  <?php endforeach; ?>
+</div>
+```
+
+### Combinaciones Útiles
+
+```html
+<!-- Con altura y redondeo -->
+<div class="bg-[url('../img/photo.jpg')] bg-cover h-px-400 rounded-lg">
+  Foto
+</div>
+
+<!-- Con ancho y altura fijos -->
+<div class="bg-[url('../img/avatar.jpg')] bg-cover size-px-200 rounded-full">
+  Avatar
+</div>
+
+<!-- Responsive: altura diferente por breakpoint -->
+<div class="bg-[url('../img/hero.jpg')] bg-cover 
+            h-px-300 md:h-px-500 lg:h-screen">
+  Hero responsive
+</div>
+
+<!-- Con aspect ratio -->
+<div class="bg-[url('../img/banner.jpg')] bg-cover aspect-video">
+  Banner 16:9
+</div>
+```
+
+### Diferencia con bg-cover de Tailwind
+
+Tailwind tiene su propia utilidad `bg-cover`, pero esta es diferente:
+
+```html
+<!-- bg-cover de Tailwind: solo background-size: cover -->
+<div class="bg-[url('...')] bg-cover bg-center bg-no-repeat">
+  Necesitas múltiples clases
+</div>
+
+<!-- bg-cover del Core: todo incluido -->
+<div class="bg-[url('...')] bg-cover">
+  Una sola clase adicional
+</div>
+```
+
+**Nuestra `bg-cover` personalizada incluye:**
+- ✅ Posicionamiento centrado
+- ✅ Sin repetición
+- ✅ Tamaño al 100%
+- ✅ Ocultación de texto para SEO
+- ✅ Todo en una sola clase
+
+---
+
 ## 🧪 Herramientas de Debugging
 
 ### 1. Test (Visualiza Jerarquía)
@@ -2523,6 +2754,7 @@ Crea un modal centrado con:
 - `styles/config/_colors.css` - Define/modifica colores
 - `styles/config/_typography.css` - Ajusta escalas tipográficas
 - `styles/config/_containers.css` - Modifica breakpoints
+- `styles/utilities/_decorateds.css` - Scrollbar e imágenes de fondo
 - `styles/utilities/_test.css` - Herramientas de debugging
 
 ### Contacto
