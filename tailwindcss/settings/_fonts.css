@@ -1,0 +1,99 @@
+/*==================================================
+  IMPORTACIÓN DE FUENTES
+ ==================================================*/
+
+/* Se usaran estas variables por defecto para los proyectos
+  nota:
+    --font-serif: usada normalmente para títulos
+    --font-sans: usada normalmente para textos
+    --font-sans: usada normalmente para Código, Eyesbrown,etc
+*/
+
+@theme {
+  --font-serif: 'Merriweather', serif;
+  --font-sans: 'OpenSans', sans-serif;
+  --font-mono: 'RobotoMono', monospace;
+}
+
+@layer base {
+   /*==================================================
+    FONT SERIF
+  ==================================================*/
+  @font-face {
+    font-family: 'Merriweather';
+    src: url('../fonts/Merriweather24pt-Bold.woff2') format('woff2'),
+        url('../fonts/Merriweather24pt-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+   /*==================================================
+    FONT SANS SERIF
+  ==================================================*/
+  @font-face {
+    font-family: 'OpenSans';
+    src: url('../fonts/OpenSans-Bold.woff2') format('woff2'),
+        url('../fonts/OpenSans-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'OpenSans';
+    src: url('../fonts/OpenSans-SemiBold.woff2') format('woff2'),
+        url('../fonts/OpenSans-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'OpenSans';
+    src: url('../fonts/OpenSans-Medium.woff2') format('woff2'),
+        url('../fonts/OpenSans-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'OpenSans';
+    src: url('../fonts/OpenSans-Regular.woff2') format('woff2'),
+        url('../fonts/OpenSans-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+   /*==================================================
+    FONT MONO CODE
+  ==================================================*/
+  @font-face {
+    font-family: 'RobotoMono';
+    src: url('../fonts/RobotoMono-Bold.woff2') format('woff2'),
+        url('../fonts/RobotoMono-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+      font-family: 'RobotoMono';
+      src: url('../fonts/RobotoMono-SemiBold.woff2') format('woff2'),
+          url('../fonts/RobotoMono-SemiBold.woff') format('woff');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+  }
+
+  @font-face {
+      font-family: 'RobotoMono';
+      src: url('../fonts/RobotoMono-Regular.woff2') format('woff2'),
+          url('../fonts/RobotoMono-Regular.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+  }
+}

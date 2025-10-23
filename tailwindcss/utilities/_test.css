@@ -1,0 +1,55 @@
+/*==================================================
+  TEST: Resalta los elementos según el nivel,
+        Padres, hijos, nietos, etc.
+==================================================*/
+@utility test {
+  @apply !border-3 !border-red-500;
+  & > * {
+    @apply !border-3 !border-yellow-400;
+    & > * {
+      @apply !border-3 !border-green-400;
+      & > * {
+        @apply !border-3 !border-blue-400;
+        & > * {
+          @apply !border-3 !border-purple-400;
+          & > * {
+            @apply !border-3 !border-yellow-700;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/*==================================================
+  TEST RESPONSIVE: Muestra el tamaño del contenedor
+==================================================*/
+@utility test-responsive {
+  &, &.test, &.test-son{
+    @apply !border-3 !border-gray-200 xs:!border-red-500 sm:!border-yellow-400 !relative
+    md:!border-green-400 lg:!border-blue-400 xl:!border-purple-400 2xl:!border-yellow-700
+    before:!absolute before:!top-0 before:!right-0 before:!font-semibold before:!px-2 before:!pb-0.5 before:!rounded-bl-lg before:!text-small before:!text-black
+    before:!block before:!content-['📱<_350'] before:!bg-gray-200
+    xs:before:!content-['📱xs:_350'] xs:before:!bg-red-500 xs:before:!text-white
+    sm:before:!content-['📱sm:_576'] sm:before:!bg-yellow-400 sm:before:!text-black
+    md:before:!content-['💻md:_768'] md:before:!bg-green-400
+    lg:before:!content-['💻lg:_992'] lg:before:!bg-blue-400
+    xl:before:!content-['🖥️xl:_1200'] xl:before:!bg-purple-400
+    2xl:before:!content-['🖥️2xl:_1400'] 2xl:before:!bg-yellow-700 2xl:before:!text-white
+    ;
+  }
+}
+
+/*==================================================
+  TEST son: Muestra los hijos directos
+==================================================*/
+@utility test-son {
+  @apply !border-3 !border-red-500;
+  & > * {
+    @apply !border-3 !border-yellow-400;
+  }
+}
+
+
+

@@ -1,0 +1,42 @@
+/*==================================================
+  Typography:
+==================================================*/
+@theme {
+  /* Se crean tipografía responsiva con la función
+    Dejo herramienta para calcular lo tamaños":
+    https://elan-sk.github.io/calculadora-clamp-css/
+  */
+  --text-h1: clamp(2.55rem, 2.4rem + 0.686vw, 3rem);            /*48px*/
+  --text-h2: clamp(2.125rem, 2rem + 0.571vw, 2.5rem);           /*40px*/
+  --text-h3: clamp(1.7rem, 1.6rem + 0.457vw, 2rem);             /*32px*/
+  --text-h4: clamp(1.488rem, 1.4rem + 0.4vw, 1.75rem);          /*28px*/
+  --text-header: clamp(1.275rem, 1.2rem + 0.343vw, 1.5rem);     /*24px*/
+  --text-button: clamp(0.956rem, 0.9rem + 0.257vw, 1.125rem);   /*18px*/
+  --text-base: clamp(0.903rem, 0.85rem + 0.243vw, 1.063rem);    /*17px*/
+  --text-small: clamp(0.797rem, 0.75rem + 0.214vw, 0.938rem);   /*15px*/
+}
+
+/* Se crean las clase de utilidad */
+@utility text-h1 { font-size: var(--text-h1); }
+@utility text-h2 { font-size: var(--text-h2); }
+@utility text-h3 { font-size: var(--text-h3); }
+@utility text-h4 { font-size: var(--text-h4); }
+@utility text-header { font-size: var(--text-header); }
+@utility text-button { font-size: var(--text-button); }
+@utility text-base { font-size: var(--text-base); }
+@utility text-small { font-size: var(--text-small); }
+
+
+/* Se hace reset de los clases para signar bold he interlineado y se crean en
+    layer de base para que estas clases puedan ser reescritas por clases de utilidad */
+@layer base {
+  header { @apply text-center mb-8; }
+
+  :is(.text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-h6 ) {
+          @apply font-serif text-balance font-bold leading-tight }
+
+  .text-header, .text-button { @apply font-sans font-semibold text-balance; }
+
+  :is( .text-header, .text-button, .text-base, .text-small ) {
+          @apply font-sans text-pretty leading-normal; }
+}
