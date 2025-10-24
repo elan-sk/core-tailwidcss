@@ -2774,5 +2774,5 @@ Este Core CSS te proporciona:
 
 **Versión:** 2.0
 **Última actualización:** Octubre 2025
-**Autor:** Equipo de Frontend
+**Autor:** [ELAN-SK](https://github.com/elan-sk)
 **Licencia:** Uso interno
